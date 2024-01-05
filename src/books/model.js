@@ -8,6 +8,10 @@ const Book = sequelize.define("Book", {
        unique:true,
        allowNull:false
     },
+    author:{
+       type: DataTypes.STRING, 
+
+    },
     genre:{
         type:DataTypes.STRING,
     }
