@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const Book = require("./model")
 
 const addBook = async (req, res) => {
@@ -75,6 +76,22 @@ const deleteAllBooks = async (req, res) => {
   }
 };
 
+const dynamicChange = async (request, response) => { 
+  const index = await Book.update(  
+     { [request.body.dynamicKey1]: request.body.dynamicValue1},
+     {
+     where: {title: request.body.title}
+     }
+     ); 
+ 
+
+  const sucessResponse = {
+      message: "Dynamic changed",
+      book: index,
+  };
+
+  response.send(sucessResponse);
+}
 
 
 
@@ -87,5 +104,6 @@ module.exports = {
     getBookByAuthor : getBookByAuthor,
     deleteOneBookByTitle : deleteOneBookByTitle,
     deleteAllBooks :deleteAllBooks,
+    dynamicChange :dynamicChange , 
 
 };
